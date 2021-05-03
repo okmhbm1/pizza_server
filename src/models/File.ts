@@ -17,8 +17,9 @@ module.exports = (sequelize: any, DataTypes: any) => {
   }
   File.init(
     {
-      file_seq: {
+      fileSeq: {
         type: DataTypes.INTEGER,
+        field: 'file_seq',
         autoIncrement: true,
         primaryKey: true,
       },

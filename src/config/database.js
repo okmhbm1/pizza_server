@@ -17,11 +17,20 @@ const common = {
 };
 
 module.exports = {
+  // development: {
+  //   username: process.env.DB_USER,
+  //   password: process.env.DB_PASSWORD,
+  //   database: process.env.DB_DATABASE,
+  //   host: process.env.DB_HOST,
+  //   dialect: 'mysql',
+  //   logging: process.env.IS_DEBUG == 1 ? true : false,
+  //   ...common,
+  // },
   development: {
-    username: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
+    username: 'root',
+    password: null,
     database: process.env.DB_DATABASE,
-    host: process.env.DB_HOST,
+    host: '127.0.0.1',
     dialect: 'mysql',
     logging: process.env.IS_DEBUG == 1 ? true : false,
     ...common,

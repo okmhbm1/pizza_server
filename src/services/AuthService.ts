@@ -14,10 +14,10 @@ class AuthService {
   }
 
   login = async () => {
-    const { user_email, password } = this.body;
+    const { userEmail, password } = this.body;
     try {
       const user = await db.User.findOne({
-        where: { user_email },
+        where: { userEmail },
       });
       if (!user) {
         return {
@@ -32,14 +32,15 @@ class AuthService {
           result: false,
         };
       }
-      let token = Authentication.generateToken(user.user_seq, user.user_email);
+      let token = Authentication.generateToken(user.userSeq, user.userEmail);
       return {
         data: {
           token,
-          user_email: user.user_email,
-          user_seq: user.user_seq,
-          user_name: user.user_name,
-          phone_number: user.phone_number,
+          userEmail: user.userEmail,
+          userSeq: user.userSeq,
+          userName: user.userName,
+          point: user.point,
+          phoneNumber: user.phoneNumber,
         },
         message: 'success',
         result: true,

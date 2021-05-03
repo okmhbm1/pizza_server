@@ -10,51 +10,59 @@ module.exports = (sequelize: any, DataTypes: any) => {
   }
   FileDetail.init(
     {
-      file_detail_seq: {
+      fileDetailSeq: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
+        field: 'file_detail_seq',
       },
-      file_seq: {
+      fileSeq: {
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
           notEmpty: true,
         },
+        field: 'file_seq',
       },
-      original_file_name: {
+      originalFileName: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: true,
         },
+        field: 'original_file_name',
       },
-      path_file_name: {
+      pathFileName: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: true,
         },
+        field: 'path_file_name',
       },
-      file_name: {
+      fileName: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: true,
         },
+        field: 'file_name',
       },
-      base_path: {
+      basePath: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: true,
         },
+        field: 'base_path',
       },
-      file_type: {
+      fileType: {
         type: DataTypes.STRING,
+        field: 'file_type',
       },
-      file_size: {
+      fileSize: {
         type: DataTypes.INTEGER,
+        field: 'file_size',
       },
     },
     {

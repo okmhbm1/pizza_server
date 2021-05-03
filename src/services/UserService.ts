@@ -4,9 +4,7 @@ import Authentication from '../utils/Authentication';
 const db = require('../models');
 class UserService {
   credential: {
-    user_seq: number;
-    mem_no: number;
-    company_no: number;
+    userSeq: number;
   };
   body: Request['body'];
   file: Request['file'];
@@ -25,9 +23,9 @@ class UserService {
     const { keyword } = this.query;
     try {
       const users = await db.User.findAll({
-        attributes: ['user_seq', 'user_email', 'phone_number', 'created_at', 'updated_at'],
+        attributes: ['userSeq', 'userEmail', 'phoneNumber', 'createdAt', 'updatedAt'],
         where: {
-          user_email: {
+          userEmail: {
             [db.Sequelize.Op.like]: `%${keyword ? keyword : ''}%`,
           },
         },
@@ -48,18 +46,18 @@ class UserService {
   };
 
   save = async () => {
-    const { user_email, password, user_name, phone_number } = this.body;
+    const { userEmail, password, userName, phoneNumber } = this.body;
     try {
       const idCheck = await db.User.findOne({
-        where: { user_email },
+        where: { userEmail },
       });
       if (!idCheck) {
         const hashedPassword: string = await Authentication.passwordHash(password);
         await db.User.create({
-          user_email,
+          userEmail,
           password: hashedPassword,
-          user_name,
-          phone_number,
+          userName,
+          phoneNumber,
         });
         return {
           message: 'success',
@@ -81,10 +79,10 @@ class UserService {
   };
 
   email_check = async () => {
-    const { user_email } = this.body;
+    const { userEmail } = this.body;
     try {
       const idCheck = await db.User.findOne({
-        where: { user_email },
+        where: { userEmail },
       });
       if (idCheck) {
         return {
@@ -107,12 +105,12 @@ class UserService {
   };
 
   password_update = async () => {
-    const { user_email, password, change_password } = this.body;
+    const { userEmail, password, changePassword } = this.body;
     const originalHashedPassword: string = await Authentication.passwordHash(password);
-    const changeHashedPassword: string = await Authentication.passwordHash(change_password);
+    const changeHashedPassword: string = await Authentication.passwordHash(changePassword);
     try {
       const check = await db.User.findOne({
-        where: { user_email, password: originalHashedPassword },
+        where: { userEmail, password: originalHashedPassword },
       });
       if (check) {
         await db.User.update(
@@ -121,7 +119,7 @@ class UserService {
           },
           {
             where: {
-              user_email: user_email,
+              userEmail: userEmail,
             },
           },
         );
@@ -145,12 +143,12 @@ class UserService {
   };
 
   detail = async () => {
-    const { user_seq } = this.params;
+    const { userSeq } = this.params;
     try {
       const user = await db.User.findOne({
-        attributes: ['user_seq', 'user_email', 'phone_number', 'createdAt', 'updatedAt'],
+        attributes: ['userSeq', 'userEmail', 'phoneNumber', 'createdAt', 'updatedAt'],
         where: {
-          user_seq,
+          userSeq,
         },
       });
       return {
@@ -172,47 +170,47 @@ class UserService {
       if (this.file) {
         const user: any = await db.User.findOne({
           where: {
-            user_seq: this.credential.user_seq,
+            userSeq: this.credential.userSeq,
           },
         });
-        if (!user.file_seq) {
+        if (!user.fileSeq) {
           file = await db.File.create({});
           await db.User.update(
             {
-              file_seq: file.file_seq,
+              fileSeq: file.fileSeq,
             },
             {
               where: {
-                user_seq: this.credential.user_seq,
+                userSeq: this.credential.userSeq,
               },
             },
           );
         }
-        if (user.file_detail_seq) {
-          await FileUpload.fileDelete(user.user_profile_image);
+        if (user.fileDetailSeq) {
+          await FileUpload.fileDelete(user.userProfileImage);
           await db.FileDetail.destroy({
             where: {
-              file_detail_seq: user.file_detail_seq,
+              fileDetailSeq: user.fileDetailSeq,
             },
           });
         }
         const fileDetail = await db.FileDetail.create({
-          file_seq: user.file_seq ? user.file_seq : file.file_seq,
-          original_file_name: this.file.originalname,
-          path_file_name: this.file.path,
-          file_name: this.file.filename,
-          file_size: this.file.size,
-          base_path: this.file.destination,
-          file_type: this.file.mimetype,
+          fileSeq: user.fileSeq ? user.fileSeq : file.fileSeq,
+          originalFileName: this.file.originalname,
+          pathFileName: this.file.path,
+          fileName: this.file.filename,
+          fileSize: this.file.size,
+          basePath: this.file.destination,
+          fileType: this.file.mimetype,
         });
         const userUpdate = await db.User.update(
           {
-            user_profile_image: fileDetail.base_path + fileDetail.file_name,
-            file_detail_seq: fileDetail.file_detail_seq,
+            userProfileImage: fileDetail.base_path + fileDetail.file_name,
+            fileDetailSeq: fileDetail.fileDetailSeq,
           },
           {
             where: {
-              user_seq: this.credential.user_seq,
+              userSeq: this.credential.userSeq,
             },
           },
         );
@@ -239,23 +237,23 @@ class UserService {
     try {
       const user = await db.User.findOne({
         where: {
-          user_seq: this.credential.user_seq,
+          userSeq: this.credential.userSeq,
         },
       });
-      await FileUpload.fileDelete(user.user_profile_image);
+      await FileUpload.fileDelete(user.userProfileImage);
       await db.FileDetail.destroy({
         where: {
-          file_detail_seq: user.file_detail_seq,
+          fileDetailSeq: user.fileDetailSeq,
         },
       });
       await db.User.update(
         {
-          user_profile_image: '',
-          file_detail_seq: null,
+          userProfileImage: '',
+          fileDetailSeq: null,
         },
         {
           where: {
-            user_seq: this.credential.user_seq,
+            userSeq: this.credential.userSeq,
           },
         },
       );

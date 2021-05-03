@@ -13,12 +13,14 @@ module.exports = (sequelize: any, DataTypes: any) => {
   }
   User.init(
     {
-      user_seq: {
+      userSeq: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
+        field: 'user_seq',
       },
-      user_email: {
+      userEmail: {
+        field: 'user_email',
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
@@ -32,24 +34,37 @@ module.exports = (sequelize: any, DataTypes: any) => {
           notEmpty: true,
         },
       },
-      user_name: {
+      userName: {
+        field: 'user_name',
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: true,
         },
       },
-      phone_number: {
+      phoneNumber: {
+        field: 'phone_number',
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: true,
         },
       },
-      user_profile_image: DataTypes.STRING,
-      file_seq: DataTypes.INTEGER,
-      file_detail_seq: DataTypes.INTEGER,
-      point: DataTypes.INTEGER,
+      userProfileImage: {
+        field: 'user_profile_image',
+        type: DataTypes.STRING,
+      },
+      fileSeq: {
+        field: 'file_seq',
+        type: DataTypes.INTEGER,
+      },
+      fileDetailSeq: {
+        field: 'file_detail_seq',
+        type: DataTypes.INTEGER,
+      },
+      point: {
+        type: DataTypes.INTEGER,
+      },
     },
     {
       sequelize,
