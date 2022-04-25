@@ -14,10 +14,10 @@ module.exports = (sequelize: any, DataTypes: any) => {
   User.init(
     {
       userSeq: {
+        field: 'user_seq',
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
-        field: 'user_seq',
       },
       userEmail: {
         field: 'user_email',
@@ -50,13 +50,30 @@ module.exports = (sequelize: any, DataTypes: any) => {
           notEmpty: true,
         },
       },
+      registerType: {
+        field: 'register_type',
+        type: DataTypes.STRING,
+      },
+      snsType: {
+        field: 'sns_type',
+        type: DataTypes.STRING,
+      },
       userProfileImage: {
         field: 'user_profile_image',
+        type: DataTypes.STRING,
+      },
+      state: {
+        type: DataTypes.STRING,
+      },
+      locale: {
         type: DataTypes.STRING,
       },
       fileSeq: {
         field: 'file_seq',
         type: DataTypes.INTEGER,
+      },
+      notification: {
+        type: DataTypes.BOOLEAN,
       },
       fileDetailSeq: {
         field: 'file_detail_seq',
@@ -64,6 +81,10 @@ module.exports = (sequelize: any, DataTypes: any) => {
       },
       point: {
         type: DataTypes.INTEGER,
+      },
+      lastActionAt: {
+        field: 'last_action_at',
+        type: DataTypes.DATE,
       },
     },
     {

@@ -17,7 +17,7 @@ class AuthController {
       } else {
         res.send(result);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       res.send({
         code: 500,
@@ -33,7 +33,7 @@ class AuthController {
         message: '로그아웃',
         result: true,
       });
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       res.send({
         code: 500,

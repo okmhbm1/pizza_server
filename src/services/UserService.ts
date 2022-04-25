@@ -36,7 +36,7 @@ class UserService {
         message: 'success',
         result: true,
       };
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       return {
         result: false,
@@ -69,7 +69,7 @@ class UserService {
           result: false,
         };
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       return {
         result: false,
@@ -95,7 +95,7 @@ class UserService {
           result: true,
         };
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       return {
         result: false,
@@ -133,7 +133,7 @@ class UserService {
           result: false,
         };
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       return {
         result: false,
@@ -156,7 +156,7 @@ class UserService {
         message: 'success',
         result: true,
       };
-    } catch (error) {
+    } catch (error: any) {
       return {
         message: error.message,
         result: false,
@@ -225,7 +225,7 @@ class UserService {
           result: true,
         };
       }
-    } catch (error) {
+    } catch (error: any) {
       return {
         message: error.message,
         result: false,
@@ -261,7 +261,7 @@ class UserService {
         message: 'success',
         result: true,
       };
-    } catch (error) {
+    } catch (error: any) {
       return {
         message: error.message,
         result: false,

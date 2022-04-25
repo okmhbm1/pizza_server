@@ -1,5 +1,4 @@
 import express, { Application, Request, Response } from 'express';
-import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import compression from 'compression';
@@ -23,7 +22,7 @@ class App {
 
   protected plugins(): void {
     this.app.use(express.static('public'));
-    this.app.use(bodyParser.json());
+    this.app.use(express.urlencoded({ extended: true }));
     this.app.use(cookieParser());
     this.app.use(morgan('dev'));
     this.app.use(compression());

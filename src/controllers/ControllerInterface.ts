@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 
 interface ControllerInterface {
   list?(req: Request, res: Response, next: any): Response | Promise<any>;

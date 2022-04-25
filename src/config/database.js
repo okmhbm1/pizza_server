@@ -28,7 +28,7 @@ module.exports = {
   // },
   development: {
     username: 'root',
-    password: null,
+    password: '1234',
     database: process.env.DB_DATABASE,
     host: '127.0.0.1',
     dialect: 'mysql',

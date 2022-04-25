@@ -45,7 +45,7 @@ class AuthService {
         message: 'success',
         result: true,
       };
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       return {
         result: false,

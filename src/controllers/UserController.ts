@@ -8,7 +8,7 @@ class UserController implements ControllerInterface {
       const service: UserService = new UserService(req);
       const result = await service.list();
       res.send(result);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       res.send({
         code: 500,
@@ -23,7 +23,7 @@ class UserController implements ControllerInterface {
       const service: UserService = new UserService(req);
       const result = await service.save();
       res.send(result);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       res.send({
         code: 500,
@@ -38,7 +38,7 @@ class UserController implements ControllerInterface {
       const service: UserService = new UserService(req);
       const result = await service.email_check();
       res.send(result);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       res.send({
         code: 500,
@@ -53,7 +53,7 @@ class UserController implements ControllerInterface {
       const service: UserService = new UserService(req);
       const result = await service.password_update();
       res.send(result);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       res.send({
         code: 500,
@@ -68,7 +68,7 @@ class UserController implements ControllerInterface {
       const service: UserService = new UserService(req);
       const result = await service.detail();
       res.send(result);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       res.send({
         code: 500,
@@ -83,7 +83,7 @@ class UserController implements ControllerInterface {
     try {
       const result = await service.profile_image_edit();
       res.send(result);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       res.send({
         code: 500,
@@ -98,7 +98,7 @@ class UserController implements ControllerInterface {
     try {
       const result = await service.profile_image_delete();
       res.send(result);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       res.send({
         code: 500,
@@ -113,7 +113,7 @@ class UserController implements ControllerInterface {
       const service: UserService = new UserService(req);
       const result = await service.phone_number_check();
       res.send(result);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       res.send({
         code: 500,
@@ -128,7 +128,7 @@ class UserController implements ControllerInterface {
       const service: UserService = new UserService(req);
       const result = await service.password_find();
       res.send(result);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       res.send({
         code: 500,
